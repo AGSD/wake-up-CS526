@@ -44,6 +44,7 @@ public class PlayerMotor : MonoBehaviour {
             if (Input.GetKey(KeyCode.UpArrow)) {
                 animator.SetTrigger("Jump");
                 moveDirection.y = jumpSpeed;
+                moveDirection.z += speed * 15;
             }
             if (Input.GetKey(KeyCode.DownArrow)) {
                 animator.SetTrigger("Slide");
