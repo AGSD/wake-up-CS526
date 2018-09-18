@@ -7,7 +7,6 @@ public class Boundary {
     public float xMin, xMax;
 }
 
-<<<<<<< HEAD
 // collision properties
 [System.Serializable]
 public class Collisions {
@@ -16,8 +15,6 @@ public class Collisions {
     public bool didCollideSideways = false;
 }
 
-=======
->>>>>>> 72622a1c8c519f71e76dfeec06a125367190c067
 public class PlayerMotor : MonoBehaviour {
 
     private Animator animator;
@@ -33,12 +30,8 @@ public class PlayerMotor : MonoBehaviour {
 
     public float gravity;
 
-<<<<<<< HEAD
     public Collisions collisions;
 
-
-=======
->>>>>>> 72622a1c8c519f71e76dfeec06a125367190c067
     // Use this for initialization
     void Start () {
         controller = GetComponent<CharacterController>();
@@ -49,8 +42,7 @@ public class PlayerMotor : MonoBehaviour {
     void Update() {
 
         if(controller.isGrounded) {
-
-<<<<<<< HEAD
+			
             if(collisions.didCollide) {
                 moveDirection = new Vector3(
                     Input.GetAxis("Horizontal") * speedXAxis,
@@ -69,13 +61,6 @@ public class PlayerMotor : MonoBehaviour {
                     speed
                 );
             }
-=======
-            moveDirection = new Vector3(
-                Input.GetAxis("Horizontal") * speedXAxis, 
-                0, 
-                speed
-            );
->>>>>>> 72622a1c8c519f71e76dfeec06a125367190c067
 
             moveDirection = transform.TransformDirection(moveDirection);
 
@@ -88,11 +73,7 @@ public class PlayerMotor : MonoBehaviour {
                 animator.SetTrigger("Slide");
                 moveDirection.z += speed;
             }
-<<<<<<< HEAD
         }
-=======
-         }
->>>>>>> 72622a1c8c519f71e76dfeec06a125367190c067
         else {
             moveDirection.x = Input.GetAxis("Horizontal") * speed;
             moveDirection.z = speed;
@@ -111,7 +92,6 @@ public class PlayerMotor : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-<<<<<<< HEAD
         if(other.CompareTag("TableStumble")) {
             animator.SetTrigger("Stumble");
         }
@@ -122,11 +102,6 @@ public class PlayerMotor : MonoBehaviour {
 
         if (other.CompareTag("TripSideways")) {
             animator.SetTrigger("Stumble Sideways");
-=======
-        if(other.CompareTag("FlameRow") || other.CompareTag("FireBall") || other.CompareTag("LargeFlames")) {
-            animator.SetTrigger("Die");
-            Debug.Log("Collison with " + other.tag);
->>>>>>> 72622a1c8c519f71e76dfeec06a125367190c067
         }
     }
 }

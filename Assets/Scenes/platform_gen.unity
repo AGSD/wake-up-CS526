@@ -217,10 +217,14 @@ MonoBehaviour:
   boundary:
     xMin: -4.5
     xMax: 4.5
-  speed: 20
-  speedXAxis: 15
-  jumpSpeed: 8
+  speed: 15
+  speedXAxis: 10
+  jumpSpeed: 10
   gravity: 20
+  collisions:
+    didCollide: 0
+    didFallFlat: 0
+    didCollideSideways: 0
 --- !u!143 &627789735
 CharacterController:
   m_ObjectHideFlags: 0
