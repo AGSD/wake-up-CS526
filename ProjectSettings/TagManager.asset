@@ -9,8 +9,9 @@ TagManager:
   - Wall
   - MainMenu
   - PlayButton
-  - FlameRow
-  - LargeFlames
+  - TableStumble
+  - TripOver
+  - TripSideways
   layers:
   - Default
   - TransparentFX
