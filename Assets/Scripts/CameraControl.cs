@@ -16,7 +16,7 @@ public class CameraControl : MonoBehaviour {
 	void Update () {
         moveVector = lookAt.position + startoffset;
         //moveVector.x = 0;
-        moveVector.y = Mathf.Clamp(moveVector.y,1,1000);
+		moveVector.y = Mathf.Clamp(moveVector.y,lookAt.position.y,lookAt.position.y+5.5f);
         transform.position = moveVector;
 	}
 }
