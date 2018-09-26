@@ -19,6 +19,7 @@ public class PlayerMotor : MonoBehaviour {
 
     private Animator animator;
     private CharacterController controller;
+	protected Joystick joystick;
 
     Vector3 moveDirection = Vector3.zero;
 
@@ -36,6 +37,7 @@ public class PlayerMotor : MonoBehaviour {
     void Start () {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+		joystick = FindObjectOfType<Joystick> ();
 	}
 
     // Update is called once per frame
@@ -45,7 +47,7 @@ public class PlayerMotor : MonoBehaviour {
 			
             if(collisions.didCollide) {
                 moveDirection = new Vector3(
-                    Input.GetAxis("Horizontal") * speedXAxis,
+					(Input.GetAxis("Horizontal")+joystick.Horizontal) * speedXAxis,
                     0,
                     0
                 );
@@ -56,7 +58,7 @@ public class PlayerMotor : MonoBehaviour {
 
             if(!collisions.didCollide && !collisions.didFallFlat && !collisions.didCollideSideways) {
                 moveDirection = new Vector3(
-                    Input.GetAxis("Horizontal") * speedXAxis,
+					(Input.GetAxis("Horizontal")+joystick.Horizontal) * speedXAxis,
                     0,
                     speed
                 );
@@ -64,18 +66,18 @@ public class PlayerMotor : MonoBehaviour {
 
             moveDirection = transform.TransformDirection(moveDirection);
 
-            if (Input.GetKey(KeyCode.UpArrow)) {
+			if (Input.GetKey(KeyCode.UpArrow) || joystick.Vertical>0.5f) {
                 animator.SetTrigger("Jump");
                 moveDirection.y = jumpSpeed;
                 moveDirection.z += speed * 15;
             }
-            if (Input.GetKey(KeyCode.DownArrow)) {
+			if (Input.GetKey(KeyCode.DownArrow) || joystick.Vertical<-0.5f) {
                 animator.SetTrigger("Slide");
                 moveDirection.z += speed;
             }
         }
         else {
-            moveDirection.x = Input.GetAxis("Horizontal") * speed;
+			moveDirection.x = (Input.GetAxis("Horizontal") + joystick.Horizontal) * speed;
             moveDirection.z = speed;
         }
         moveDirection.y -= gravity * Time.deltaTime;
