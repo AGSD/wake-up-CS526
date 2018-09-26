@@ -75,13 +75,13 @@ public class PlayerMotor : MonoBehaviour {
 
             moveDirection = transform.TransformDirection(moveDirection);
 
-            if (Input.GetKey(KeyCode.UpArrow) || joystick.Vertical > 0.5f && enableDisable.isUpArrowEnabled) {
+            if ((Input.GetKey(KeyCode.UpArrow) || joystick.Vertical > 0.5f) && enableDisable.isUpArrowEnabled) {
                 animator.SetTrigger("Jump");
                 moveDirection.y = jumpSpeed;
                 moveDirection.z += speed * 15;
 
             }
-            if (Input.GetKey(KeyCode.DownArrow) || joystick.Vertical < -0.5f && enableDisable.isDownArrowEnabled) {
+            if ((Input.GetKey(KeyCode.DownArrow) || joystick.Vertical < -0.5f) && enableDisable.isDownArrowEnabled) {
                 animator.SetTrigger("Slide");
                 moveDirection.z += speed;
             }
