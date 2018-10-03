@@ -30,7 +30,7 @@ public class PlatformSpawner : MonoBehaviour {
 
 	void SpawnZ(){
 		Vector3 pos = transform.position;
-		int op = Random.Range (0, floorParent.transform.childCount - 1);
+		int op = Random.Range (0, floorParent.transform.childCount);
 		Debug.Log ("Spawning " + (op+1).ToString()+ " " + pos.ToString());
 		Q.Enqueue (Instantiate (floorParent.transform.GetChild (op).gameObject, pos, Quaternion.identity));
 		Vector3 end = floorParent.transform.GetChild (op).Find ("end").position;

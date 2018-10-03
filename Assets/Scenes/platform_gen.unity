@@ -225,6 +225,9 @@ MonoBehaviour:
     didCollide: 0
     didFallFlat: 0
     didCollideSideways: 0
+  enableDisable:
+    isUpArrowEnabled: 1
+    isDownArrowEnabled: 1
 --- !u!143 &627789735
 CharacterController:
   m_ObjectHideFlags: 0
@@ -447,7 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1140696076}
-  floorParent: {fileID: 1883889200721142, guid: 1302c4a10d88d0d4eaece3553f1c8ef8,
+  floorParent: {fileID: 1384723971976692, guid: 3cd7267d381c17a448b332bc903781bc,
     type: 2}
   spawnLength: 100
 --- !u!1 &1414231751
