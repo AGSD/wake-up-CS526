@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 64336559745250784}
   m_Layer: 0
   m_Name: bedside_table.002 (1)
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 64096109775152816}
   m_Layer: 0
   m_Name: table
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 64011975629627864}
   m_Layer: 0
   m_Name: bedside_table.002
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -619,10 +619,10 @@ MeshCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1865797778210890}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 63eed49c2a895c449ae6a39ea1b47645, type: 3}
@@ -633,10 +633,10 @@ MeshCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1811029848052764}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 9a07cb271d871ab49ab442220ee08629, type: 3}
@@ -647,10 +647,10 @@ MeshCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1734882609430256}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 63eed49c2a895c449ae6a39ea1b47645, type: 3}

@@ -326,9 +326,55 @@ Prefab:
       propertyPath: m_WholeNumbers
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114075972650741882, guid: ab3ca92a1dfd24a86a526c4f2d943a95,
+        type: 2}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114075972650741882, guid: ab3ca92a1dfd24a86a526c4f2d943a95,
+        type: 2}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114075972650741882, guid: ab3ca92a1dfd24a86a526c4f2d943a95,
+        type: 2}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.3066038
+      objectReference: {fileID: 0}
+    - target: {fileID: 114075972650741882, guid: ab3ca92a1dfd24a86a526c4f2d943a95,
+        type: 2}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.3066038
+      objectReference: {fileID: 0}
+    - target: {fileID: 114075972650741882, guid: ab3ca92a1dfd24a86a526c4f2d943a95,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114576360288098914, guid: ab3ca92a1dfd24a86a526c4f2d943a95,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9811321
+      objectReference: {fileID: 0}
+    - target: {fileID: 114576360288098914, guid: ab3ca92a1dfd24a86a526c4f2d943a95,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114576360288098914, guid: ab3ca92a1dfd24a86a526c4f2d943a95,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab3ca92a1dfd24a86a526c4f2d943a95, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &411430866 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114075972650741882, guid: ab3ca92a1dfd24a86a526c4f2d943a95,
+    type: 2}
+  m_PrefabInternal: {fileID: 411430865}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &513321991
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,17 +525,22 @@ MonoBehaviour:
   boundary:
     xMin: -4.5
     xMax: 4.5
-  speed: 15
-  speedXAxis: 10
-  jumpSpeed: 10
-  gravity: 20
   collisions:
     didCollide: 0
     didFallFlat: 0
     didCollideSideways: 0
+    didBump: 0
   enableDisable:
     isUpArrowEnabled: 1
     isDownArrowEnabled: 1
+  damageValues:
+    tableStumbleDamage: 30
+    tripOverDamage: 20
+    tripSideWaysDamage: 10
+  speed: 15
+  speedXAxis: 10
+  jumpSpeed: 10
+  gravity: 20
 --- !u!143 &627789735
 CharacterController:
   m_ObjectHideFlags: 0
@@ -507,6 +558,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &627789736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 627789733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d512d1f94273a4dfea55e17457325815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  currentHealth: 0
+  healthSlider: {fileID: 411430866}
 --- !u!1 &840956753
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,7 +777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1140696076}
-  floorParent: {fileID: 1883889200721142, guid: 1302c4a10d88d0d4eaece3553f1c8ef8,
+  floorParent: {fileID: 1472357429823232, guid: 300fc6d3b77774ab49a30e8066feba92,
     type: 2}
   spawnLength: 100
 --- !u!1 &1414231751
