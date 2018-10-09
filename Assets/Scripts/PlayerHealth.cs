@@ -53,12 +53,12 @@ public class PlayerHealth : MonoBehaviour {
 
         // If the player has lost all its health and the death flag hasn't been set yet...
         if (currentHealth <= 0 && !isDead) {
-            // player should die.
+            // ...player should die.
             Death();
         }
     }
     // When player dies
-    private void Death() {
+    public void Death() {
         // Set the death flag so this function won't be called again.
         isDead = true;
 

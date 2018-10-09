@@ -60,14 +60,15 @@ public class PlayerMotor : MonoBehaviour {
     public float gravity;
 
     // Reference to the player's health.
-    PlayerHealth playerHealth;                  
-
+    PlayerHealth playerHealth;
 
     // Use this for initialization
     void Start () {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+
         joystick = FindObjectOfType<Joystick>();
+
         playerHealth = GetComponent<PlayerHealth>();
     }
 
