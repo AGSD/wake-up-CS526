@@ -12,6 +12,7 @@ TagManager:
   - TableStumble
   - TripOver
   - TripSideways
+  - ProgressBarHUD
   layers:
   - Default
   - TransparentFX

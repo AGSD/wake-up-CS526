@@ -113,6 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!224 &251128230 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224406911424455484, guid: 7b89d014154194558a3267d2df51e43a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1215543258}
 --- !u!224 &361702720 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224194425143762970, guid: 7b89d014154194558a3267d2df51e43a,
@@ -511,6 +516,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10f08c91b972c4c978291594b72e0651, type: 2}
   m_IsPrefabAsset: 0
+--- !u!224 &614504425 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224665389758265380, guid: 7b89d014154194558a3267d2df51e43a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1215543258}
 --- !u!1 &627789733 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100144, guid: 96a37cc6fea0b46bc801ea2d7a0178ee,
@@ -578,6 +588,23 @@ MonoBehaviour:
   currentHealth: 0
   healthSlider: {fileID: 411430866}
   isDead: 0
+--- !u!114 &627789739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 627789733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0babd77e78e4680b24b9767b9f93f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingBar: {fileID: 251128230}
+  textIndicator: {fileID: 614504425}
+  textLoading: {fileID: 1766032816}
+  currentProgress: 0
+  speed: 1
+  isInFreeFall: 0
 --- !u!1 &840956753
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,7 +866,30 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1937228873848304, guid: 7b89d014154194558a3267d2df51e43a, type: 2}
+      propertyPath: m_TagString
+      value: ProgressBarHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1937228873848304, guid: 7b89d014154194558a3267d2df51e43a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671915286999222, guid: 7b89d014154194558a3267d2df51e43a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114207943432346114, guid: 7b89d014154194558a3267d2df51e43a,
+        type: 2}
+      propertyPath: isInFreeFall
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114207943432346114, guid: 7b89d014154194558a3267d2df51e43a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114207943432346114, guid: 7b89d014154194558a3267d2df51e43a, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 7b89d014154194558a3267d2df51e43a, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1386147353
@@ -1173,6 +1223,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224070147403872398, guid: ce5089f3caa5bb042a4d4c23a427bc82,
     type: 2}
   m_PrefabInternal: {fileID: 1692799698}
+--- !u!224 &1766032816 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224469762163459058, guid: 7b89d014154194558a3267d2df51e43a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1215543258}
 --- !u!1001 &1839045169
 Prefab:
   m_ObjectHideFlags: 0

@@ -15,25 +15,36 @@ public class PlayerProgress : MonoBehaviour {
     [SerializeField] private float currentProgress;
     [SerializeField] private float speed;
 
+    // Free-Fall check to stop updating progress
+    public bool isInFreeFall = false;
+
     // Use this for initialization
     void Start () {
-		
-	}
+        loadingBar.GetComponent<Image>().fillAmount = currentProgress;
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
-        if(currentProgress < 100) {
+        if(currentProgress < 100 && !isInFreeFall) {
             currentProgress += speed * Time.deltaTime;
             textIndicator.GetComponent<Text>().text = ((int)currentProgress).ToString() + "%";
 
             textLoading.gameObject.SetActive(true);
         }
-        else {
+        else if (currentProgress >= 100 && !isInFreeFall) {
             textIndicator.GetComponent<Text>().text = "DONE!";
             textLoading.gameObject.SetActive(false);
         }
+        else if (isInFreeFall) {
+            textIndicator.GetComponent<Text>().text = "YOU DIED!";
+            textLoading.gameObject.SetActive(false);
 
-        loadingBar.GetComponent<Image>().fillAmount = currentProgress / 100;
+            loadingBar.GetComponent<Image>().fillAmount = currentProgress;
+        }
+
+        if(!isInFreeFall) {
+            loadingBar.GetComponent<Image>().fillAmount = currentProgress / 100;
+        }
 	}
 }

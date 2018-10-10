@@ -123,11 +123,11 @@ public class PlayerMotor : MonoBehaviour {
             controller.Move(moveDirection * Time.deltaTime);
 
             // Trigger falling animation when player goes below ground level
-            if(transform.position.y < 0) {
+            if(transform.position.y < -10.0f) {
                 animator.SetTrigger("Free Fall");
 
                 playerHealth.healthSlider.value = 0;
-                playerProgress.loadingBar.gameObject.SetActive(false);
+                playerProgress.isInFreeFall = true;
             }
         }
         ClampPosition();
