@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 65686774083118992}
   m_Layer: 0
   m_Name: stone_half_gate.001
-  m_TagString: TableStumble
+  m_TagString: GateStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 65842116259033968}
   m_Layer: 0
   m_Name: stone_half_gate.001 (1)
-  m_TagString: TableStumble
+  m_TagString: GateStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

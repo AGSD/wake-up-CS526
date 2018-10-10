@@ -11,19 +11,18 @@ public class Boundary {
 // Collision properties
 [System.Serializable]
 public class Collisions {
-    public bool didCollide = false;
-    public bool didFallFlat = false;
-    public bool didCollideSideways = false;
-
-    public bool didBump = false;
+    public bool didCollide = false;         // Stumble and Jump Stumble
+    public bool didFallFlat = false;        // Trip
+    public bool didCollideSideways = false; // Trip Sideways
 }
 
 // HealthBar Damage properties
 [System.Serializable]
 public class DamageValues {
-    public int tableStumbleDamage = 30;
-    public int tripOverDamage = 20;
-    public int tripSideWaysDamage = 10;
+    public int jumpStumbleDamage = 20;
+    public int tableStumbleDamage = 10;
+    public int tripOverDamage = 5;
+    public int tripSideWaysDamage = 5;
 }
 
 // Enable/Disable Buttons Properties
@@ -82,7 +81,7 @@ public class PlayerMotor : MonoBehaviour {
         if(!playerHealth.isDead) {
             if (controller.isGrounded) { 
 
-                if (collisions.didCollide || collisions.didBump) {
+                if (collisions.didCollide) {
                     moveDirection = new Vector3(
                         (Input.GetAxis("Horizontal") + joystick.Horizontal) * speedXAxis,
                         0.0f,
@@ -93,7 +92,9 @@ public class PlayerMotor : MonoBehaviour {
                     moveDirection = Vector3.zero;
                 }
 
-                if (!collisions.didCollide && !collisions.didFallFlat && !collisions.didCollideSideways) {
+                if (!collisions.didCollide && 
+                    !collisions.didFallFlat && 
+                    !collisions.didCollideSideways) {
                     moveDirection = new Vector3(
                         (Input.GetAxis("Horizontal") + joystick.Horizontal) * speedXAxis,
                         0,
@@ -109,10 +110,10 @@ public class PlayerMotor : MonoBehaviour {
                     moveDirection.z += speed * 15;
 
                 }
-                if ((Input.GetKey(KeyCode.DownArrow) || joystick.Vertical < -0.5f) && enableDisable.isDownArrowEnabled) {
+                /*if ((Input.GetKey(KeyCode.DownArrow) || joystick.Vertical < -0.5f) && enableDisable.isDownArrowEnabled) {
                     animator.SetTrigger("Slide");
                     moveDirection.z += speed;
-                }
+                }*/
             }
             else {
                 moveDirection.x = (Input.GetAxis("Horizontal") + joystick.Horizontal) * speed;
@@ -147,8 +148,8 @@ public class PlayerMotor : MonoBehaviour {
         }
 
         if (other.CompareTag("TripOver")) {
-            animator.SetTrigger("Fall Flat");
-            DamagePlayer("Fall Flat");
+            animator.SetTrigger("Trip");
+            DamagePlayer("Trip");
         }
 
         if (other.CompareTag("TripSideways")) {
@@ -156,9 +157,10 @@ public class PlayerMotor : MonoBehaviour {
             DamagePlayer("Stumble Sideways");
         }
 
-        /*if(other.CompareTag("TableStumble") || other.CompareTag("TripSideways")) {
-            animator.SetTrigger("Bump");
-        }*/
+        if(other.CompareTag("GateStumble")) {
+            animator.SetTrigger("Jump Stumble");
+            DamagePlayer("Jump Stumble");
+        }
     }
     private void DamagePlayer(string animationTrigger) {
         // If the player has health to lose...
@@ -168,10 +170,14 @@ public class PlayerMotor : MonoBehaviour {
             if(animationTrigger == "Stumble") {
                 playerHealth.TakeDamage(damageValues.tableStumbleDamage);
             }
-            else if(animationTrigger == "Fall Flat") {
+            else if(animationTrigger == "Trip") {
                 playerHealth.TakeDamage(damageValues.tripOverDamage);
-            } else if(animationTrigger == "Stumble Sideways") {
+            } 
+            else if(animationTrigger == "Stumble Sideways") {
                 playerHealth.TakeDamage(damageValues.tripSideWaysDamage);
+            }
+            else if (animationTrigger == "Jump Stumble") {
+                playerHealth.TakeDamage(damageValues.jumpStumbleDamage);
             }
         }
     }

@@ -13,6 +13,7 @@ TagManager:
   - TripOver
   - TripSideways
   - ProgressBarHUD
+  - GateStumble
   layers:
   - Default
   - TransparentFX
