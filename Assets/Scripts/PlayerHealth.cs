@@ -18,6 +18,9 @@ public class PlayerHealth : MonoBehaviour {
     // Reference to the player's movement.
     PlayerMotor playerMotor;
 
+    // Reference to the player's progress
+    PlayerProgress playerProgress;
+
     // True when the player gets damaged.
     bool damaged;
 
@@ -30,6 +33,7 @@ public class PlayerHealth : MonoBehaviour {
         // Setting up the references.
         anim = GetComponent<Animator>();
         playerMotor = GetComponent<PlayerMotor>();
+        playerProgress = GetComponent<PlayerProgress>();
 
         // Set the initial health of the player.
         currentHealth = startingHealth;
@@ -55,6 +59,7 @@ public class PlayerHealth : MonoBehaviour {
         if (currentHealth <= 0 && !isDead) {
             // ...player should die.
             Death();
+            playerProgress.isInFreeFall = true; // not exactly, but do the same functions as if the player's in free fall
         }
     }
     // When player dies
