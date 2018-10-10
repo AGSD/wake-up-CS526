@@ -62,6 +62,9 @@ public class PlayerMotor : MonoBehaviour {
     // Reference to the player's health.
     PlayerHealth playerHealth;
 
+    // Reference to the player's progress
+    PlayerProgress playerProgress;
+
     // Use this for initialization
     void Start () {
         controller = GetComponent<CharacterController>();
@@ -70,6 +73,7 @@ public class PlayerMotor : MonoBehaviour {
         joystick = FindObjectOfType<Joystick>();
 
         playerHealth = GetComponent<PlayerHealth>();
+        playerProgress = GetComponent<PlayerProgress>();
     }
 
     // Update is called once per frame
@@ -117,6 +121,14 @@ public class PlayerMotor : MonoBehaviour {
             moveDirection.y -= gravity * Time.deltaTime;
 
             controller.Move(moveDirection * Time.deltaTime);
+
+            // Trigger falling animation when player goes below ground level
+            if(transform.position.y < 0) {
+                animator.SetTrigger("Free Fall");
+
+                playerHealth.healthSlider.value = 0;
+                playerProgress.loadingBar.gameObject.SetActive(false);
+            }
         }
         ClampPosition();
     }
