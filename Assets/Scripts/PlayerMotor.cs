@@ -64,6 +64,12 @@ public class PlayerMotor : MonoBehaviour {
     // Reference to the player's progress
     PlayerProgress playerProgress;
 
+    // Reference to the player's audio source
+    public AudioSource audioSource;
+
+    // Reference to the player's audio clip
+    public AudioClip audioClip;
+
     // Use this for initialization
     void Start () {
         controller = GetComponent<CharacterController>();
@@ -73,6 +79,8 @@ public class PlayerMotor : MonoBehaviour {
 
         playerHealth = GetComponent<PlayerHealth>();
         playerProgress = GetComponent<PlayerProgress>();
+
+        audioSource.clip = audioClip;
     }
 
     // Update is called once per frame
@@ -145,6 +153,7 @@ public class PlayerMotor : MonoBehaviour {
         if(other.CompareTag("TableStumble")) {
             animator.SetTrigger("Stumble");
             DamagePlayer("Stumble");
+            audioSource.Play();
         }
 
         if (other.CompareTag("TripOver")) {
