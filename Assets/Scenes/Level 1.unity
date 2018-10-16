@@ -521,7 +521,7 @@ MonoBehaviour:
   jumpSpeed: 10
   gravity: 20
   audioSource: {fileID: 627789740}
-  audioClip: {fileID: 8300000, guid: 7661b6c846dac48939a7917d8eb1b51c, type: 3}
+  gameAudio: {fileID: 0}
 --- !u!143 &627789735
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1140,6 +1140,10 @@ Prefab:
     - target: {fileID: 4815076360850290, guid: 3f9a27b67e2e14796aaf37907a122fd1, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028731272907742, guid: 3f9a27b67e2e14796aaf37907a122fd1, type: 2}
+      propertyPath: m_TagString
+      value: Game Audio
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f9a27b67e2e14796aaf37907a122fd1, type: 2}

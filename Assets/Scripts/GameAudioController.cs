@@ -7,10 +7,13 @@ public class GameAudioController : MonoBehaviour {
     // Reference to the game's audio source
     public AudioSource audioSource;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    // Reference to the player's health.
+    PlayerHealth playerHealth;
+
+    // Use this for initialization
+    void Start () {
+        playerHealth = GetComponent<PlayerHealth>();
+    }
 	
 	// Update is called once per frame
 	void Update () {

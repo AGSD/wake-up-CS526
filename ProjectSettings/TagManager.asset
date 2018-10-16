@@ -14,6 +14,15 @@ TagManager:
   - TripSideways
   - ProgressBarHUD
   - GateStumble
+  - aag ka gola
+  - aag ka shola
+  - Bullet
+  - fire
+  - Enemy
+  - Enemy2
+  - EnemyBody
+  - hero
+  - Game Audio
   layers:
   - Default
   - TransparentFX

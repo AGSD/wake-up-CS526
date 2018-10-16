@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Boundary properties
 [System.Serializable]
@@ -67,8 +68,8 @@ public class PlayerMotor : MonoBehaviour {
     // Reference to the player's audio source
     public AudioSource audioSource;
 
-    // Reference to the player's audio clip
-    public AudioClip audioClip;
+    // Reference to the game audio's source
+    GameAudioController gameAudio;
 
     // Use this for initialization
     void Start () {
@@ -80,7 +81,7 @@ public class PlayerMotor : MonoBehaviour {
         playerHealth = GetComponent<PlayerHealth>();
         playerProgress = GetComponent<PlayerProgress>();
 
-        audioSource.clip = audioClip;
+        gameAudio = GameObject.FindGameObjectWithTag("Game Audio").GetComponent<GameAudioController>();
     }
 
     // Update is called once per frame
@@ -137,6 +138,8 @@ public class PlayerMotor : MonoBehaviour {
 
                 playerHealth.healthSlider.value = 0;
                 playerProgress.isInFreeFall = true;
+
+                PlayDeathAudio();
             }
         }
         ClampPosition();
@@ -151,27 +154,56 @@ public class PlayerMotor : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("TableStumble")) {
+
+            // Trigger animation
             animator.SetTrigger("Stumble");
+
+            // Decrease health
             DamagePlayer("Stumble");
-            audioSource.Play();
+
+            // Play impact sound
+            PlayAudio(Resources.Load("Sounds/JustImpacts-Extension2_Metal_Hit_Crash_200") as AudioClip);
         }
 
         if (other.CompareTag("TripOver")) {
+
+            // Trigger animation
             animator.SetTrigger("Trip");
+
+            // Decrease health
             DamagePlayer("Trip");
+
+            // Play impact sound
+            PlayAudio(Resources.Load("Sounds/Just_Impacts_Extension-I_163") as AudioClip);
+
         }
 
         if (other.CompareTag("TripSideways")) {
+
+            // Trigger animation
             animator.SetTrigger("Stumble Sideways");
+
+            // Decrease health
             DamagePlayer("Stumble Sideways");
+
+            // Play impact sound
+            PlayAudio(Resources.Load("Sounds/JustImpacts-Extension2_Misc_Hits_044") as AudioClip);
         }
 
         if(other.CompareTag("GateStumble")) {
+
+            // Trigger animation
             animator.SetTrigger("Jump Stumble");
+
+            // Decrease health
             DamagePlayer("Jump Stumble");
+
+            // Play impact sound
+            PlayAudio(Resources.Load("Sounds/Just_Impacts_Extension-I_171") as AudioClip);
         }
     }
     private void DamagePlayer(string animationTrigger) {
+
         // If the player has health to lose...
         if (playerHealth.currentHealth > 0) {
             // ... damage the player based on animation triggered.
@@ -189,5 +221,22 @@ public class PlayerMotor : MonoBehaviour {
                 playerHealth.TakeDamage(damageValues.jumpStumbleDamage);
             }
         }
+        if(playerHealth.isDead) {
+            PlayDeathAudio();
+            
+        }
+    }
+    public void PlayAudio(AudioClip clip) {
+
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
+
+    // Stop current audio and play death audio
+    private void PlayDeathAudio() {
+        gameAudio.audioSource.Stop();
+
+        gameAudio.audioSource.clip = Resources.Load("Sounds/Just_Transitions_Creepy-008") as AudioClip;
+        gameAudio.audioSource.Play();
     }
 }
