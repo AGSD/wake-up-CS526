@@ -521,7 +521,6 @@ MonoBehaviour:
   jumpSpeed: 10
   gravity: 20
   audioSource: {fileID: 627789740}
-  gameAudio: {fileID: 0}
 --- !u!143 &627789735
 CharacterController:
   m_ObjectHideFlags: 0

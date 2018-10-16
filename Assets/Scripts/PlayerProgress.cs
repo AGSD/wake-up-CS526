@@ -12,7 +12,7 @@ public class PlayerProgress : MonoBehaviour {
     public Transform textLoading;
 
     // Values holding current progress and speed of progress.
-    [SerializeField] private float currentProgress;
+    public float currentProgress;
     [SerializeField] private float speed;
 
     // Free-Fall check to stop updating progress

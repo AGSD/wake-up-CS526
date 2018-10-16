@@ -30,10 +30,13 @@ public class MainMenu : MonoBehaviour {
     public void FadeToLevel(int levelIndex) {
         levelToLoad = levelIndex;
         animator.SetTrigger("FadeOut");
-
     }
 
-    public void OnFadeComplete() {
+    public void OnFadeOutComplete() {
         SceneManager.LoadScene(levelToLoad);
+        animator.SetTrigger("FadeIn");
+    }
+    public void OnFadeInComplete() {
+
     }
 }

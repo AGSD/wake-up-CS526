@@ -31,13 +31,13 @@ public class PlatformSpawner : MonoBehaviour {
 	void SpawnZ(){
 		Vector3 pos = transform.position;
 		int op = Random.Range (0, floorParent.transform.childCount);
-		Debug.Log ("Spawning " + (op+1).ToString()+ " " + pos.ToString());
+		//Debug.Log ("Spawning " + (op+1).ToString()+ " " + pos.ToString());
 		Q.Enqueue (Instantiate (floorParent.transform.GetChild (op).gameObject, pos, Quaternion.identity));
 		Vector3 end = floorParent.transform.GetChild (op).Find ("end").position;
-		Debug.Log ("End at: " + end.ToString ());
+		//Debug.Log ("End at: " + end.ToString ());
 		pos += end;
 		transform.position = pos;
-		Debug.Log ("PlatformSpawner moved to: "+pos.ToString());
+		//Debug.Log ("PlatformSpawner moved to: "+pos.ToString());
 
 	}
 	void DeleteZ(){
@@ -47,7 +47,7 @@ public class PlatformSpawner : MonoBehaviour {
 		Vector3 cameraPos = camera.transform.position;
 		float diff = cameraPos.z - qfrontEnd.z;
 		if (diff > 0) {
-			Debug.Log ("Deleting " + tmp.name);
+			//Debug.Log ("Deleting " + tmp.name);
 			Destroy (tmp);
 			Q.Dequeue ();
 		}

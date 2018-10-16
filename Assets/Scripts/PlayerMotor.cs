@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 // Boundary properties
 [System.Serializable]
@@ -130,19 +130,37 @@ public class PlayerMotor : MonoBehaviour {
             }
             moveDirection.y -= gravity * Time.deltaTime;
 
-            controller.Move(moveDirection * Time.deltaTime);
-
-            // Trigger falling animation when player goes below ground level
-            if(transform.position.y < -10.0f) {
-                animator.SetTrigger("Free Fall");
-
-                playerHealth.healthSlider.value = 0;
-                playerProgress.isInFreeFall = true;
-
-                PlayDeathAudio();
+            if (((int)Mathf.Round(transform.position.z) % 250) == 0) {
+                //Debug.Log("Increase speed");
+                speed += 1.0f;
+                moveDirection.z = speed;
             }
+
+            controller.Move(moveDirection * Time.deltaTime);
         }
         ClampPosition();
+
+        // Trigger falling animation when player goes below ground level
+        // So player has died and we reload the scene after playing the death audio
+        if (transform.position.y < -20.0f) {
+
+            animator.SetTrigger("Free Fall");
+
+            playerHealth.healthSlider.value = 0;
+            playerProgress.isInFreeFall = true;
+
+            PlayDeathAudio();
+
+            // Reload current scene
+            StartCoroutine("ReloadScene");
+        }
+
+        // Transition to the next scene if the player is done with the level
+        if(playerProgress.currentProgress >= 100) {
+            LoadNextScene();
+        }
+
+
     }
     private void ClampPosition() {
         transform.position = new Vector3(
@@ -223,6 +241,7 @@ public class PlayerMotor : MonoBehaviour {
         }
         if(playerHealth.isDead) {
             PlayDeathAudio();
+            RestartCurrentScene();
             
         }
     }
@@ -238,5 +257,33 @@ public class PlayerMotor : MonoBehaviour {
 
         gameAudio.audioSource.clip = Resources.Load("Sounds/Just_Transitions_Creepy-008") as AudioClip;
         gameAudio.audioSource.Play();
+    }
+    // Transition to boss scene given the level index when player's progress is done
+    private void TransitionToBossScene(int levelIndex) {
+        SceneManager.LoadScene(levelIndex);
+    }
+
+    // Reload current scene after player dies AFTER 10 SECONDS!
+    private void RestartCurrentScene() {
+        StartCoroutine("ReloadScene");
+    }
+    IEnumerator ReloadScene() {
+        yield return new WaitForSeconds(10);
+
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+    }
+
+    // Transition to the next scene after progress is done
+    private void LoadNextScene() {
+        enabled = false; // stop playerMotor script from running
+        animator.enabled = false; // stop running animation or any animation for that matter
+        StartCoroutine("LoadScene");
+    }
+    IEnumerator LoadScene() {
+        yield return new WaitForSeconds(10);
+
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);
     }
 }
