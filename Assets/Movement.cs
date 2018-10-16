@@ -70,7 +70,7 @@ public class Movement : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.R)){
            
-            SceneManager.LoadScene("Bossbattle1");
+            SceneManager.LoadScene("Sarthak Boss Battle");
 
 
         }
