@@ -18,11 +18,14 @@ public class DemonCOntroller : MonoBehaviour
     public Transform shotpoint;
 	public GameObject player;
     public static int i = 0;
+	public bool enemyMove=true;
+	Animator anim;
     // Use this for initialization
     void Awake()
     {
 
         rb = GetComponent<Rigidbody>();
+		anim = GetComponent<Animator> ();
 
     }
 
@@ -48,14 +51,19 @@ public class DemonCOntroller : MonoBehaviour
 
         if (healthbar.value<=0){
             win.gameObject.SetActive(true);
+			enemyMove = false;
+
+
         }
 
     }
 
 
+
+
     private IEnumerator Randomjump()
     {
-        while (true)
+		while (enemyMove)
         {
 			float curMoveSpeed = moveSpeed;
 			Quaternion rotation = transform.rotation;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Movement : MonoBehaviour
+public class movement : MonoBehaviour
 {
     public Text Gameover;
     public Text missiles;
@@ -24,6 +24,9 @@ public class Movement : MonoBehaviour
 	private bool left;
 	private Quaternion playerRotation;
 	private Quaternion projectileRotation;
+	public bool playerMove=true;
+	public GameObject enemy;
+	DemonCOntroller enemyScript;
     // Use this for initialization
     void Awake()
     {
@@ -31,6 +34,8 @@ public class Movement : MonoBehaviour
         missiles.text = "Missiles Left :" + a;
         bullets.text = "Bullets Left :" + b;
         rb = GetComponent<Rigidbody>();
+		enemyScript = enemy.GetComponent<DemonCOntroller> ();
+
     }
 
     void Start()
@@ -77,55 +82,55 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         if(Input.GetKeyUp(KeyCode.R)){
-            SceneManager.LoadScene("Sarthak Boss Battle");
+            SceneManager.LoadScene("Level 1 Boss");
         }
 
         if (healthbar1.value <= 0)
         {
             Gameover.gameObject.SetActive(true);
+			playerMove = false;
+			enemyScript.enemyMove = false;
+
         }
-        if (Input.GetKeyUp("space"))
-        {
-            if (j == 0)
-            {if (a > 0)
-                {
-					GameObject newProjectile = Instantiate(projectile, shotpoint.position, projectileRotation) as GameObject;
-					newProjectile.transform.localScale = (new Vector3(0.3f,0.3f,0.3f));
-                    a--;
-                    missiles.text = "Missiles Left :" + a;
-                }
-            }
+		if(enemyScript.healthbar.value<=0){
+			playerMove = false;
+			
+		}
+		if (playerMove) {
+			if (Input.GetKeyUp ("space")) {
+				if (j == 0) {
+					if (a > 0) {
+						GameObject newProjectile = Instantiate (projectile, shotpoint.position, projectileRotation) as GameObject;
+						newProjectile.transform.localScale = (new Vector3 (0.3f, 0.3f, 0.3f));
+						a--;
+						missiles.text = "Missiles Left :" + a;
+					}
+				} else {
+					if (b > 0) {
+						GameObject newProjectile = Instantiate (projectile2, shotpoint.position, projectileRotation) as GameObject;
+						newProjectile.transform.localScale = (new Vector3 (2.0f, 2.0f, 2.0f));
+						b--;
+						bullets.text = "Bullets Left :" + b;
+					}
+				}
+			}
 
-            else
-            {
-                if (b > 0)
-                {
-					GameObject newProjectile =  Instantiate(projectile2, shotpoint.position, projectileRotation) as GameObject;
-					newProjectile.transform.localScale = (new Vector3(2.0f,2.0f,2.0f));
-                    b--;
-                    bullets.text = "Bullets Left :" + b;
-                }
-            }
-        }
 
+			if (Input.GetKeyUp ("down")) {
+				if (j == 0) {
+					transform.GetChild (0).GetChild (0).gameObject.SetActive (false);
+					transform.GetChild (0).GetChild (1).gameObject.SetActive (true);
+					j++;
 
-        if (Input.GetKeyUp("down")){
-            if(j==0){
-                transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-                transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
-                j++;
+				} else {
+					transform.GetChild (0).GetChild (0).gameObject.SetActive (true);
+					transform.GetChild (0).GetChild (1).gameObject.SetActive (false);
+					j--;
 
-            }
-            else
-            {
-                transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-                transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
-                j--;
+				}
+			}
 
-            }
-        }
-
-        /*if (transform.position.z>112){
+			/*if (transform.position.z>112){
             GetComponent<Collider>().isTrigger = true;
             Gameover.gameObject.SetActive(true);
         }
@@ -136,10 +141,10 @@ public class Movement : MonoBehaviour
             Gameover.gameObject.SetActive(true);
         }*/
 
-		float moveHorizontal = Input.GetAxis("Horizontal");
+			float moveHorizontal = Input.GetAxis ("Horizontal");
 
 
-		//if (!Mathf.Approximately (moveHorizontal, 0)) {
+			//if (!Mathf.Approximately (moveHorizontal, 0)) {
 			if (moveHorizontal < 0) {
 				playerRotation.y = 180;
 				projectileRotation.y = 0;
@@ -149,26 +154,28 @@ public class Movement : MonoBehaviour
 				projectileRotation.y = 180;
 				left = false;
 			}
-		//}
+			//}
 
-		transform.rotation = playerRotation;
+			transform.rotation = playerRotation;
 
-		if(left)
-        	transform.Translate(0, 0, -moveHorizontal * 12f * Time.deltaTime);
-		else
-			transform.Translate(0, 0, moveHorizontal * 12f * Time.deltaTime);
+			if (left)
+				transform.Translate (0, 0, -moveHorizontal * 12f * Time.deltaTime);
+			else
+				transform.Translate (0, 0, moveHorizontal * 12f * Time.deltaTime);
 
-        if  (Input.GetKeyUp("up") && InAir == false)
-        {
-            anim.SetTrigger("jump");
-            print("its working");
-            Vector3 a = new Vector3(0, 8f, 0);
-            transform.Translate(0, jumpforce*Time.deltaTime, 0);
+			if (Input.GetKeyUp ("up") && InAir == false) {
+				anim.SetTrigger ("jump");
+				print ("its working");
+				Vector3 a = new Vector3 (0, 8f, 0);
+				rb.AddForce(0, jumpforce, 0, ForceMode.Impulse);
 
-        }
+			}
+		}
 
 
     }
+
+
 
 
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571334, b: 0.3069219, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -502,8 +502,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boundary:
-    xMin: -4.5
-    xMax: 4.5
+    xMin: -4
+    xMax: 4
   collisions:
     didCollide: 0
     didFallFlat: 0
@@ -521,6 +521,7 @@ MonoBehaviour:
   jumpSpeed: 10
   gravity: 20
   audioSource: {fileID: 627789740}
+  playerMoveFlag: 1
 --- !u!143 &627789735
 CharacterController:
   m_ObjectHideFlags: 0
@@ -568,8 +569,9 @@ MonoBehaviour:
   textIndicator: {fileID: 614504425}
   textLoading: {fileID: 1766032816}
   currentProgress: 0
-  speed: 1
+  speed: 10
   isInFreeFall: 0
+  calledSetDeath: 0
 --- !u!82 &627789740
 AudioSource:
   m_ObjectHideFlags: 0

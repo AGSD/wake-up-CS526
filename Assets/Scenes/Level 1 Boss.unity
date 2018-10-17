@@ -1572,7 +1572,7 @@ GameObject:
   - component: {fileID: 331403625}
   - component: {fileID: 331403624}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: Game Over
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1609,7 +1609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.8245647, g: 0.8679245, b: 0.11053756, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3813,6 +3813,7 @@ MonoBehaviour:
     type: 2}
   shotpoint: {fileID: 144497017}
   player: {fileID: 1241888398}
+  enemyMove: 1
 --- !u!1 &787752152
 GameObject:
   m_ObjectHideFlags: 0
@@ -4427,7 +4428,7 @@ GameObject:
   - component: {fileID: 944102993}
   - component: {fileID: 944102992}
   m_Layer: 5
-  m_Name: Text (3)
+  m_Name: Win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4463,7 +4464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.84202105, g: 0.8962264, b: 0.12259703, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5869,9 +5870,11 @@ MonoBehaviour:
     type: 2}
   shotpoint: {fileID: 1396690027}
   InAir: 0
-  speed: 0.5
-  jumpforce: 500
+  speed: 20
+  jumpforce: 14
   healthbar1: {fileID: 1621463818}
+  playerMove: 1
+  enemy: {fileID: 781522636}
 --- !u!95 &1241888400
 Animator:
   serializedVersion: 3
@@ -6343,7 +6346,7 @@ GameObject:
   - component: {fileID: 1316748166}
   - component: {fileID: 1316748164}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Missiles Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7050,7 +7053,7 @@ GameObject:
   - component: {fileID: 1456422756}
   - component: {fileID: 1456422757}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Bullets Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7673,7 +7676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.9811321, g: 0.96445453, b: 0.0786757, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
