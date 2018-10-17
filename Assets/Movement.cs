@@ -21,6 +21,9 @@ public class Movement : MonoBehaviour
     private Rigidbody rb;
     public int jumpforce;
     public UnityEngine.UI.Slider healthbar1;
+	private bool left;
+	private Quaternion playerRotation;
+	private Quaternion projectileRotation;
     // Use this for initialization
     void Awake()
     {
@@ -32,6 +35,11 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+		left = true;
+		playerRotation = Quaternion.identity;
+		projectileRotation = Quaternion.identity;
+		playerRotation.y = 180;
+		projectileRotation.y = 0;
 
         healthbar1.value = 50;
 
@@ -69,24 +77,20 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         if(Input.GetKeyUp(KeyCode.R)){
-           
             SceneManager.LoadScene("Sarthak Boss Battle");
-
-
         }
 
         if (healthbar1.value <= 0)
         {
             Gameover.gameObject.SetActive(true);
-
-
         }
         if (Input.GetKeyUp("space"))
         {
             if (j == 0)
             {if (a > 0)
                 {
-                    Instantiate(projectile, shotpoint.position, Quaternion.identity);
+					GameObject newProjectile = Instantiate(projectile, shotpoint.position, projectileRotation) as GameObject;
+					newProjectile.transform.localScale = (new Vector3(0.3f,0.3f,0.3f));
                     a--;
                     missiles.text = "Missiles Left :" + a;
                 }
@@ -96,7 +100,8 @@ public class Movement : MonoBehaviour
             {
                 if (b > 0)
                 {
-                    Instantiate(projectile2, shotpoint.position, Quaternion.identity);
+					GameObject newProjectile =  Instantiate(projectile2, shotpoint.position, projectileRotation) as GameObject;
+					newProjectile.transform.localScale = (new Vector3(2.0f,2.0f,2.0f));
                     b--;
                     bullets.text = "Bullets Left :" + b;
                 }
@@ -118,10 +123,9 @@ public class Movement : MonoBehaviour
                 j--;
 
             }
-
         }
 
-        if (transform.position.z>112){
+        /*if (transform.position.z>112){
             GetComponent<Collider>().isTrigger = true;
             Gameover.gameObject.SetActive(true);
         }
@@ -130,13 +134,29 @@ public class Movement : MonoBehaviour
         {
             GetComponent<Collider>().isTrigger = true;
             Gameover.gameObject.SetActive(true);
-        }
+        }*/
+
+		float moveHorizontal = Input.GetAxis("Horizontal");
 
 
-        float moveHorizontal = -Input.GetAxis("Horizontal");
-        transform.Translate(0, 0, moveHorizontal * 12f * Time.deltaTime);
+		//if (!Mathf.Approximately (moveHorizontal, 0)) {
+			if (moveHorizontal < 0) {
+				playerRotation.y = 180;
+				projectileRotation.y = 0;
+				left = true;
+			} else if (moveHorizontal > 0) {
+				playerRotation.y = 0;
+				projectileRotation.y = 180;
+				left = false;
+			}
+		//}
 
-    
+		transform.rotation = playerRotation;
+
+		if(left)
+        	transform.Translate(0, 0, -moveHorizontal * 12f * Time.deltaTime);
+		else
+			transform.Translate(0, 0, moveHorizontal * 12f * Time.deltaTime);
 
         if  (Input.GetKeyUp("up") && InAir == false)
         {
@@ -148,7 +168,7 @@ public class Movement : MonoBehaviour
         }
 
 
-        }
+    }
 
 
 

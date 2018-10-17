@@ -32,28 +32,16 @@ public class amovestrip : MonoBehaviour {
 
     void Update()
     {
-
-
-
-      
-           
             transform.Translate(Vector3.back * speed * Time.deltaTime);
-       
-        
-      
-
     }
 
     private IEnumerator Des()
     {
         while (true)
         {
-
             yield return new WaitForSeconds(1.5f);
             Instantiate(parti, transform.position, Quaternion.identity);
-
             Destroy(gameObject);
-
         }
     }
 

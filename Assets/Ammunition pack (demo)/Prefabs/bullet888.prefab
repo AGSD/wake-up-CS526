@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13698ce1f6a394559b79582251adbe75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 60
+  speed: 20
   timeline: 0
   parti: {fileID: 1774965523660604, guid: 88ddeedd39d1249618ea1d06ee0673f0, type: 2}
   distance: 1111

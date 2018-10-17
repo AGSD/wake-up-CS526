@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fec6c6c04e97445c9c165ea689918f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 30
   timeline: 0
   destroyobject: {fileID: 1192464410604046, guid: add8d8fe8838940618f587eeb3595a82,
     type: 2}
