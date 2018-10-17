@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Movement : MonoBehaviour
+public class Level1Boss_PlayerMovement : MonoBehaviour
 {
     public Text Gameover;
     public Text missiles;
@@ -69,8 +69,9 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         if(Input.GetKeyUp(KeyCode.R)){
-           
-            SceneManager.LoadScene("Sarthak Boss Battle");
+
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
 
 
         }
