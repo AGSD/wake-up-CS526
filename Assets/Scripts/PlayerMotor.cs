@@ -71,6 +71,9 @@ public class PlayerMotor : MonoBehaviour {
     // Reference to the game audio's source
     GameAudioController gameAudio;
 
+    // Flag for progress
+    public bool playerMoveFlag = true;
+
     // Use this for initialization
     void Start () {
         controller = GetComponent<CharacterController>();
@@ -87,7 +90,7 @@ public class PlayerMotor : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if(!playerHealth.isDead) {
+        if(!playerHealth.isDead && playerMoveFlag) {
             if (controller.isGrounded) { 
 
                 if (collisions.didCollide) {
@@ -144,7 +147,7 @@ public class PlayerMotor : MonoBehaviour {
         // So player has died and we reload the scene after playing the death audio
         if (transform.position.y < -20.0f) {
 
-            animator.SetTrigger("Free Fall");
+            //animator.SetTrigger("Free Fall");
 
             playerHealth.healthSlider.value = 0;
             playerProgress.isInFreeFall = true;
@@ -211,7 +214,7 @@ public class PlayerMotor : MonoBehaviour {
         if(other.CompareTag("GateStumble")) {
 
             // Trigger animation
-            animator.SetTrigger("Jump Stumble");
+            animator.SetTrigger("Stumble");
 
             // Decrease health
             DamagePlayer("Jump Stumble");
@@ -264,24 +267,24 @@ public class PlayerMotor : MonoBehaviour {
     }
 
     // Reload current scene after player dies AFTER 10 SECONDS!
-    private void RestartCurrentScene() {
+    public void RestartCurrentScene() {
         StartCoroutine("ReloadScene");
     }
     IEnumerator ReloadScene() {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
 
         int scene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
 
     // Transition to the next scene after progress is done
-    private void LoadNextScene() {
+    public void LoadNextScene() {
         enabled = false; // stop playerMotor script from running
         animator.enabled = false; // stop running animation or any animation for that matter
         StartCoroutine("LoadScene");
     }
     IEnumerator LoadScene() {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
 
         int scene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);

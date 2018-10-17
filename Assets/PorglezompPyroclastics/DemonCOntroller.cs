@@ -11,10 +11,12 @@ public class DemonCOntroller : MonoBehaviour
     private Rigidbody rb;
     public Slider healthbar;
     public int health;
-    public float speed;
+    public float jumpSpeed;
+	public float moveSpeed;
     public GameObject projectile;
     public GameObject specialprojectile;
     public Transform shotpoint;
+	public GameObject player;
     public static int i = 0;
     // Use this for initialization
     void Awake()
@@ -54,59 +56,35 @@ public class DemonCOntroller : MonoBehaviour
     private IEnumerator Randomjump()
     {
         while (true)
-
         {
-            if (transform.position.z >= 25)
-            {
-        
-                while (transform.position.z >= -10)
+			float curMoveSpeed = moveSpeed;
+			Quaternion rotation = transform.rotation;
 
-                {
+			if (transform.position.z >=  player.transform.position.z) {
+				curMoveSpeed *= -1;
+				rotation.y = -180;
+			} else {
+				rotation.y = 0;
+			}
+			transform.rotation = rotation;
 
-                    yield return new WaitForSeconds(1.7f);
-                    rb.AddForce(0, speed, 0, ForceMode.Impulse);
-                    int x = Random.Range(0, 2);
-                                                   if (x == 1)
-                    {
-                        Instantiate(specialprojectile, shotpoint.position, Quaternion.identity);
-                        print("hero");
-                        yield return new WaitForSeconds(0.4f);
-                        rb.AddForce(0, 0, -speed, ForceMode.Impulse);
-                    }
-                    else
-                    {
-                        Instantiate(projectile, shotpoint.position, Quaternion.identity);
-                        print("hero");
-                        yield return new WaitForSeconds(0.4f);
-                        rb.AddForce(0, 0, -speed, ForceMode.Impulse);
-                    }
-                }
-            }
-            else
-            {
-    
-                yield return new WaitForSeconds(1.7f);
-                rb.AddForce(0, speed, 0, ForceMode.Impulse);
-                int x = Random.Range(0, 2);
-                if (x == 1)
-                {
-                    Instantiate(specialprojectile, shotpoint.position, Quaternion.identity);
-                    print("hero");
-                    yield return new WaitForSeconds(0.4f);
-                    rb.AddForce(0, 0, speed, ForceMode.Impulse);
-                }
-                else
-                {
-                    Instantiate(projectile, shotpoint.position, Quaternion.identity);
-                    print("hero");
-                    yield return new WaitForSeconds(0.4f);
-                    rb.AddForce(0, 0, speed, ForceMode.Impulse);
-                }
+			yield return new WaitForSeconds(1.7f);
 
-            }
+			if(transform.position.y < 1.0)
+				rb.AddForce(0, jumpSpeed, 0, ForceMode.Impulse);
+
+			int x = Random.Range(0, 2);
+
+
+			if (x == 1)
+				Instantiate (specialprojectile, shotpoint.position, rotation);
+			else {
+				GameObject newProjectile = Instantiate (projectile, shotpoint.position, rotation) as GameObject;
+				newProjectile.transform.localScale = (new Vector3 (5f,5f,5f));
+			}	
+			if (transform.position.y < 1.0) {
+					rb.AddForce (0, 0, curMoveSpeed, ForceMode.Impulse);
+			}
         }
-
-
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
@@ -58,12 +60,14 @@ public class PlayerHealth : MonoBehaviour {
         // If the player has lost all its health and the death flag hasn't been set yet...
         if (currentHealth <= 0 && !isDead) {
             // ...player should die.
-            Death();
-            playerProgress.isInFreeFall = true; // not exactly, but do the same functions as if the player's in free fall
+            //Death();
+            //playerProgress.isInFreeFall = true; // not exactly, but do the same functions as if the player's in free fall
+
+            StartCoroutine(KillPlayer(4));
         }
     }
     // When player dies
-    public void Death() {
+   /*public void Death() {
         // Set the death flag so this function won't be called again.
         isDead = true;
 
@@ -72,5 +76,27 @@ public class PlayerHealth : MonoBehaviour {
 
         // Turn off the movement script.
         playerMotor.enabled = false;
+    }*/
+
+    IEnumerator KillPlayer(float seconds) {
+        float currentTime = 0;
+        playerMotor.playerMoveFlag = false;
+
+        // Set the death flag so this function won't be called again.
+        isDead = true;
+
+        // Tell the animator that the player is dead.
+        anim.SetTrigger("Die");
+
+        playerProgress.SetDeath();
+
+        while(currentTime < seconds) {
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+
+        playerMotor.RestartCurrentScene();
+
     }
 }

@@ -18,33 +18,54 @@ public class PlayerProgress : MonoBehaviour {
     // Free-Fall check to stop updating progress
     public bool isInFreeFall = false;
 
+    public bool calledSetDeath = false;
+
+    // Player Animator Reference
+    Animator animator;
+
+    // Player Motor Reference
+    PlayerMotor playerMotor;
+
     // Use this for initialization
     void Start () {
         loadingBar.GetComponent<Image>().fillAmount = currentProgress;
+
+        animator = GetComponent<Animator>();
+        playerMotor = GetComponent<PlayerMotor>();
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
-        if(currentProgress < 100 && !isInFreeFall) {
+        if(currentProgress < 100 && !isInFreeFall && !calledSetDeath) {
             currentProgress += speed * Time.deltaTime;
             textIndicator.GetComponent<Text>().text = ((int)currentProgress).ToString() + "%";
 
             textLoading.gameObject.SetActive(true);
         }
-        else if (currentProgress >= 100 && !isInFreeFall) {
+        else if (currentProgress >= 100 && !isInFreeFall && !calledSetDeath) {
             textIndicator.GetComponent<Text>().text = "DONE!";
             textLoading.gameObject.SetActive(false);
         }
         else if (isInFreeFall) {
-            textIndicator.GetComponent<Text>().text = "YOU DIED!";
-            textLoading.gameObject.SetActive(false);
-
-            loadingBar.GetComponent<Image>().fillAmount = currentProgress;
+            animator.SetTrigger("Free Fall");
+            SetDeath();
+            playerMotor.RestartCurrentScene();
         }
 
         if(!isInFreeFall) {
             loadingBar.GetComponent<Image>().fillAmount = currentProgress / 100;
         }
 	}
+
+    // Implement player death
+    public void SetDeath() {
+
+        calledSetDeath = true;
+
+        textIndicator.GetComponent<Text>().text = "YOU DIED!";
+        textLoading.gameObject.SetActive(false);
+
+        loadingBar.GetComponent<Image>().fillAmount = currentProgress;
+    }
 }
