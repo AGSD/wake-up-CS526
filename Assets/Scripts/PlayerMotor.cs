@@ -145,7 +145,7 @@ public class PlayerMotor : MonoBehaviour {
 
         // Trigger falling animation when player goes below ground level
         // So player has died and we reload the scene after playing the death audio
-        if (transform.position.y < -20.0f) {
+        /*if (transform.position.y < -20.0f) {
 
             //animator.SetTrigger("Free Fall");
 
@@ -156,7 +156,7 @@ public class PlayerMotor : MonoBehaviour {
 
             // Reload current scene
             StartCoroutine("ReloadScene");
-        }
+        }*/
 
         // Transition to the next scene if the player is done with the level
         if(playerProgress.currentProgress >= 100) {
@@ -222,6 +222,18 @@ public class PlayerMotor : MonoBehaviour {
             // Play impact sound
             PlayAudio(Resources.Load("Sounds/Just_Impacts_Extension-I_171") as AudioClip);
         }
+
+        // To trigger falling animation
+        if(other.CompareTag("falling")) {
+
+            playerHealth.healthSlider.value = 0;
+            playerProgress.isInFreeFall = true;
+
+            PlayDeathAudio();
+
+            // Reload current scene
+            StartCoroutine("ReloadScene");
+        }
     }
     private void DamagePlayer(string animationTrigger) {
 
@@ -271,7 +283,7 @@ public class PlayerMotor : MonoBehaviour {
         StartCoroutine("ReloadScene");
     }
     IEnumerator ReloadScene() {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
 
         int scene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
@@ -282,11 +294,20 @@ public class PlayerMotor : MonoBehaviour {
         enabled = false; // stop playerMotor script from running
         animator.enabled = false; // stop running animation or any animation for that matter
         StartCoroutine("LoadScene");
+       //LoadScene();
     }
     IEnumerator LoadScene() {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
 
         int scene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);
     }
+    /*private void LoadScene() {
+        animator.runtimeAnimatorController = Resources.Load("Animator/LevelChanger") as RuntimeAnimatorController;
+        animator.SetTrigger("FadeOut");
+    }
+    public void OnFadeOutComplete() {
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);
+    }*/
 }

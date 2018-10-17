@@ -1100,7 +1100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1140696076}
-  floorParent: {fileID: 1850111586866328, guid: 69476e493b825437a85682d98c54511a,
+  floorParent: {fileID: 1470449449825348, guid: b3cd428a4677cbe4fa779847dab3a840,
     type: 2}
   spawnLength: 100
 --- !u!1001 &1406573533

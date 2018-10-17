@@ -11,6 +11,10 @@ public class MainMenu : MonoBehaviour {
     Ray ray;
     RaycastHit rayHit;
 
+    private void Start() {
+        animator = GetComponent<Animator>();
+    }
+
     // Update is called once per frame
     public void Update () {
         if(Input.GetMouseButtonDown(0)) {
@@ -32,7 +36,7 @@ public class MainMenu : MonoBehaviour {
         animator.SetTrigger("FadeOut");
     }
 
-    public void OnFadeOutComplete() {
+    public void OnFadeComplete() {
         SceneManager.LoadScene(levelToLoad);
         animator.SetTrigger("FadeIn");
     }
