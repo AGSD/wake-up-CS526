@@ -709,7 +709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4087779406067872}
   m_Layer: 0
-  m_Name: floor15 1
+  m_Name: floor15_fall_detect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
