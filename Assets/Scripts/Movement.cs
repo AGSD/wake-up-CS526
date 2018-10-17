@@ -76,15 +76,16 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Input.GetKeyUp(KeyCode.R)){
-            SceneManager.LoadScene("Sarthak Boss Battle");
+        if(Input.GetKeyDown(KeyCode.R)){
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
 
         if (healthbar1.value <= 0)
         {
             Gameover.gameObject.SetActive(true);
         }
-        if (Input.GetKeyUp("space"))
+        if (Input.GetKeyDown("space"))
         {
             if (j == 0)
             {if (a > 0)
@@ -109,7 +110,7 @@ public class Movement : MonoBehaviour
         }
 
 
-        if (Input.GetKeyUp("down")){
+        if (Input.GetKeyDown("down")){
             if(j==0){
                 transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
                 transform.GetChild(0).GetChild(1).gameObject.SetActive(true);

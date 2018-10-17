@@ -282,6 +282,7 @@ public class PlayerMotor : MonoBehaviour {
         enabled = false; // stop playerMotor script from running
         animator.enabled = false; // stop running animation or any animation for that matter
         StartCoroutine("LoadScene");
+       //LoadScene();
     }
     IEnumerator LoadScene() {
         yield return new WaitForSeconds(5);
@@ -289,4 +290,12 @@ public class PlayerMotor : MonoBehaviour {
         int scene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);
     }
+    /*private void LoadScene() {
+        animator.runtimeAnimatorController = Resources.Load("Animator/LevelChanger") as RuntimeAnimatorController;
+        animator.SetTrigger("FadeOut");
+    }
+    public void OnFadeOutComplete() {
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);
+    }*/
 }

@@ -521,6 +521,7 @@ MonoBehaviour:
   jumpSpeed: 10
   gravity: 20
   audioSource: {fileID: 627789740}
+  playerMoveFlag: 1
 --- !u!143 &627789735
 CharacterController:
   m_ObjectHideFlags: 0
@@ -568,8 +569,9 @@ MonoBehaviour:
   textIndicator: {fileID: 614504425}
   textLoading: {fileID: 1766032816}
   currentProgress: 0
-  speed: 1
+  speed: 10
   isInFreeFall: 0
+  calledSetDeath: 0
 --- !u!82 &627789740
 AudioSource:
   m_ObjectHideFlags: 0
