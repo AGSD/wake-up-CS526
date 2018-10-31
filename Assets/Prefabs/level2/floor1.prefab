@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 4591337062578706}
   m_Layer: 0
   m_Name: ConstructionCone 1 (2)
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 4107341295413498}
   - component: {fileID: 33885536068706058}
   - component: {fileID: 23117328303349888}
+  - component: {fileID: 64779970964719994}
   m_Layer: 0
   m_Name: RoadDivider 1
   m_TagString: Untagged
@@ -359,7 +360,7 @@ GameObject:
   - component: {fileID: 4610693472608130}
   m_Layer: 0
   m_Name: Trash_01_Old_Prefab
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -476,7 +477,7 @@ GameObject:
   - component: {fileID: 4473343250891126}
   m_Layer: 0
   m_Name: ConstructionCone 1
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -559,7 +560,7 @@ GameObject:
   - component: {fileID: 4541971574094068}
   m_Layer: 0
   m_Name: Trash_01_New_Prefab (1)
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -608,7 +609,7 @@ GameObject:
   - component: {fileID: 4200449688888454}
   m_Layer: 0
   m_Name: Hydrant_01_Old_Prefab (1)
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -910,7 +911,7 @@ GameObject:
   - component: {fileID: 4971221998468162}
   m_Layer: 0
   m_Name: Bench_01_New_Prefab
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1464,7 +1465,7 @@ GameObject:
   - component: {fileID: 4662667652855970}
   m_Layer: 0
   m_Name: Street_Light_01_3_New_Prefab
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1666,7 +1667,7 @@ GameObject:
   - component: {fileID: 4885804753332334}
   m_Layer: 0
   m_Name: Bench_02_New_Prefab
-  m_TagString: Untagged
+  m_TagString: TripOver
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1681,7 +1682,7 @@ GameObject:
   - component: {fileID: 4434991538325140}
   m_Layer: 0
   m_Name: Trash_01_New_Prefab
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1696,7 +1697,7 @@ GameObject:
   - component: {fileID: 4898579849676972}
   m_Layer: 0
   m_Name: Hydrant_01_Old_Prefab
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1847,7 +1848,7 @@ GameObject:
   - component: {fileID: 4838765194686878}
   m_Layer: 0
   m_Name: Bench_02_Old_Prefab
-  m_TagString: Untagged
+  m_TagString: TripOver
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2050,7 +2051,7 @@ GameObject:
   - component: {fileID: 4220874813739562}
   m_Layer: 0
   m_Name: Street_Light_01_4_New_Prefab
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2167,7 +2168,7 @@ GameObject:
   - component: {fileID: 4165404362108390}
   m_Layer: 0
   m_Name: Street_Light_01_3_Old_Prefab
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2233,7 +2234,7 @@ GameObject:
   - component: {fileID: 4530568812820724}
   m_Layer: 0
   m_Name: WaterTank
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2367,7 +2368,7 @@ GameObject:
   - component: {fileID: 4161781045981918}
   m_Layer: 0
   m_Name: Scaffolding
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2469,7 +2470,7 @@ GameObject:
   - component: {fileID: 23186211732076254}
   m_Layer: 0
   m_Name: LightPole
-  m_TagString: Untagged
+  m_TagString: TripSideways
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2535,7 +2536,7 @@ GameObject:
   - component: {fileID: 4710045065389586}
   m_Layer: 0
   m_Name: Bench_01_OldPrefab
-  m_TagString: Untagged
+  m_TagString: TripOver
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2601,7 +2602,7 @@ GameObject:
   - component: {fileID: 4643316967886268}
   m_Layer: 0
   m_Name: WorkLight
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2840,7 +2841,7 @@ GameObject:
   - component: {fileID: 23307237085870868}
   m_Layer: 0
   m_Name: Cylinder.061
-  m_TagString: Untagged
+  m_TagString: TripSideways
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2955,7 +2956,7 @@ GameObject:
   - component: {fileID: 4765294336193284}
   m_Layer: 0
   m_Name: ConstructionCone 1 (1)
-  m_TagString: Untagged
+  m_TagString: TableStumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12436,6 +12437,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1351280303494778}
   m_Mesh: {fileID: 4300012, guid: 9393f32c4a0fa1c45a93522821ce249b, type: 3}
+--- !u!64 &64779970964719994
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1065061539376946}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 86c7741ccc195104ea92fc4828014cca, type: 3}
 --- !u!65 &65317663861515076
 BoxCollider:
   m_ObjectHideFlags: 1
