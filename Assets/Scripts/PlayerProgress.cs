@@ -6,10 +6,7 @@ using UnityEngine.UI;
 public class PlayerProgress : MonoBehaviour {
 
     // References to the Transform of the UI Components in the RadialProgressBar gameObject.
-    public Transform loadingBar;
-
-    public Transform textIndicator;
-    public Transform textLoading;
+    public Slider loadingBar;
 
     // Values holding current progress and speed of progress.
     public float currentProgress;
@@ -28,7 +25,7 @@ public class PlayerProgress : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        loadingBar.GetComponent<Image>().fillAmount = currentProgress;
+        loadingBar.value = 0;
 
         animator = GetComponent<Animator>();
         playerMotor = GetComponent<PlayerMotor>();
@@ -39,13 +36,6 @@ public class PlayerProgress : MonoBehaviour {
 		
         if(currentProgress < 100 && !isInFreeFall && !calledSetDeath) {
             currentProgress += speed * Time.deltaTime;
-            textIndicator.GetComponent<Text>().text = ((int)currentProgress).ToString() + "%";
-
-            textLoading.gameObject.SetActive(true);
-        }
-        else if (currentProgress >= 100 && !isInFreeFall && !calledSetDeath) {
-            textIndicator.GetComponent<Text>().text = "DONE!";
-            textLoading.gameObject.SetActive(false);
         }
         else if (isInFreeFall) {
             animator.SetTrigger("Free Fall");
@@ -54,18 +44,12 @@ public class PlayerProgress : MonoBehaviour {
         }
 
         if(!isInFreeFall) {
-            loadingBar.GetComponent<Image>().fillAmount = currentProgress / 100;
+            loadingBar.value = currentProgress / 100;
         }
 	}
 
     // Implement player death
     public void SetDeath() {
-
         calledSetDeath = true;
-
-        textIndicator.GetComponent<Text>().text = "YOU DIED!";
-        textLoading.gameObject.SetActive(false);
-
-        loadingBar.GetComponent<Image>().fillAmount = currentProgress;
     }
 }
