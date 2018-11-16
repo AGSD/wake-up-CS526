@@ -2324,7 +2324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingBar: {fileID: 0}
   currentProgress: 0
-  speed: 1
+  speed: 10
   isInFreeFall: 0
   calledSetDeath: 0
 --- !u!114 &114744582461790002
@@ -2364,10 +2364,10 @@ MonoBehaviour:
     isUpArrowEnabled: 1
     isDownArrowEnabled: 1
   damageValues:
-    jumpStumbleDamage: 20
-    tableStumbleDamage: 30
-    tripOverDamage: 20
-    tripSideWaysDamage: 10
+    jumpStumbleDamage: -20
+    tableStumbleDamage: -30
+    tripOverDamage: -20
+    tripSideWaysDamage: -10
   speed: 15
   speedXAxis: 10
   jumpSpeed: 10

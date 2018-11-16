@@ -38,7 +38,7 @@ public class PlayerMotor : MonoBehaviour {
     private Animator animator;
     private CharacterController controller;
     protected Joystick joystick;
-
+	public bool reachedEnd = false;
     Vector3 moveDirection = Vector3.zero;
 
     // Boundary reference
@@ -89,82 +89,81 @@ public class PlayerMotor : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+		if (!reachedEnd) {			
+			if (!playerHealth.isDead && playerMoveFlag) {
+				if (controller.isGrounded) { 
 
-        if(!playerHealth.isDead && playerMoveFlag) {
-            if (controller.isGrounded) { 
+					if (collisions.didCollide) {
+						moveDirection = new Vector3 (
+							(Input.GetAxis ("Horizontal") + joystick.Horizontal) * speedXAxis,
+							0.0f,
+							0.0f
+						);
+					}
+					if (collisions.didFallFlat || collisions.didCollideSideways) {
+						moveDirection = Vector3.zero;
+					}
 
-                if (collisions.didCollide) {
-                    moveDirection = new Vector3(
-                        (Input.GetAxis("Horizontal") + joystick.Horizontal) * speedXAxis,
-                        0.0f,
-                        0.0f
-                    );
-                }
-                if (collisions.didFallFlat || collisions.didCollideSideways) {
-                    moveDirection = Vector3.zero;
-                }
+					if (!collisions.didCollide &&
+					    !collisions.didFallFlat &&
+					    !collisions.didCollideSideways) {
+						moveDirection = new Vector3 (
+							(Input.GetAxis ("Horizontal") + joystick.Horizontal) * speedXAxis,
+							0,
+							speed
+						);
+					}
 
-                if (!collisions.didCollide && 
-                    !collisions.didFallFlat && 
-                    !collisions.didCollideSideways) {
-                    moveDirection = new Vector3(
-                        (Input.GetAxis("Horizontal") + joystick.Horizontal) * speedXAxis,
-                        0,
-                        speed
-                    );
-                }
+					moveDirection = transform.TransformDirection (moveDirection);
 
-                moveDirection = transform.TransformDirection(moveDirection);
+					if ((Input.GetKey (KeyCode.UpArrow) || joystick.Vertical > 0.5f) && enableDisable.isUpArrowEnabled) {
+						animator.SetTrigger ("Jump");
+						moveDirection.y = jumpSpeed;
+						moveDirection.z += speed * 15;
 
-                if ((Input.GetKey(KeyCode.UpArrow) || joystick.Vertical > 0.5f) && enableDisable.isUpArrowEnabled) {
-                    animator.SetTrigger("Jump");
-                    moveDirection.y = jumpSpeed;
-                    moveDirection.z += speed * 15;
+					}
+					/*if ((Input.GetKey(KeyCode.DownArrow) || joystick.Vertical < -0.5f) && enableDisable.isDownArrowEnabled) {
+	                    animator.SetTrigger("Slide");
+	                    moveDirection.z += speed;
+	                }*/
+				} else {
+					moveDirection.x = (Input.GetAxis ("Horizontal") + joystick.Horizontal) * speed;
+					moveDirection.z = speed;
+				}
+				moveDirection.y -= gravity * Time.deltaTime;
 
-                }
-                /*if ((Input.GetKey(KeyCode.DownArrow) || joystick.Vertical < -0.5f) && enableDisable.isDownArrowEnabled) {
-                    animator.SetTrigger("Slide");
-                    moveDirection.z += speed;
-                }*/
-            }
-            else {
-                moveDirection.x = (Input.GetAxis("Horizontal") + joystick.Horizontal) * speed;
-                moveDirection.z = speed;
-            }
-            moveDirection.y -= gravity * Time.deltaTime;
+				if (((int)Mathf.Round (transform.position.z) % 250) == 0) {
+					//Debug.Log("Increase speed");
+					speed += 1.0f;
+					moveDirection.z = speed;
+				}
 
-            if (((int)Mathf.Round(transform.position.z) % 250) == 0) {
-                //Debug.Log("Increase speed");
-                speed += 1.0f;
-                moveDirection.z = speed;
-            }
+				controller.Move (moveDirection * Time.deltaTime);
+			}
+			ClampPosition ();
 
-            controller.Move(moveDirection * Time.deltaTime);
-        }
-        ClampPosition();
+			// Trigger falling animation when player goes below ground level
+			// So player has died and we reload the scene after playing the death audio
+			/*if (transform.position.y < -20.0f) {
 
-        // Trigger falling animation when player goes below ground level
-        // So player has died and we reload the scene after playing the death audio
-        /*if (transform.position.y < -20.0f) {
+	            //animator.SetTrigger("Free Fall");
 
-            //animator.SetTrigger("Free Fall");
+	            playerHealth.healthSlider.value = 0;
+	            playerProgress.isInFreeFall = true;
 
-            playerHealth.healthSlider.value = 0;
-            playerProgress.isInFreeFall = true;
+	            PlayDeathAudio();
 
-            PlayDeathAudio();
+	            // Reload current scene
+	            StartCoroutine("ReloadScene");
+	        }*/
 
-            // Reload current scene
-            StartCoroutine("ReloadScene");
-        }*/
-
-        // Transition to the next scene if the player is done with the level
-        if(playerProgress.currentProgress >= 100) {
-            LoadNextScene();
-        }
-
-
+			// Transition to the next scene if the player is done with the level
+			/*if(playerProgress.currentProgress >= 100) {
+	            LoadNextScene();
+	        }*/
+		}
     }
+
     private void ClampPosition() {
         transform.position = new Vector3(
             Mathf.Clamp(transform.position.x, boundary.xMin, boundary.xMax),
@@ -234,6 +233,14 @@ public class PlayerMotor : MonoBehaviour {
             // Reload current scene
             StartCoroutine("ReloadScene");
         }
+
+		if (other.CompareTag ("FinalStop")) {
+			animator.SetTrigger ("StopFinal");
+			Animator fade = GameObject.FindGameObjectWithTag("HUD").GetComponent<Animator>();
+			fade.SetTrigger ("FadeOut");
+			LoadNextScene ();
+			reachedEnd = true;
+		}
     }
     private void DamagePlayer(string animationTrigger) {
 
@@ -257,7 +264,6 @@ public class PlayerMotor : MonoBehaviour {
         if(playerHealth.isDead) {
             PlayDeathAudio();
             RestartCurrentScene();
-            
         }
     }
     public void PlayAudio(AudioClip clip) {
@@ -292,13 +298,12 @@ public class PlayerMotor : MonoBehaviour {
     // Transition to the next scene after progress is done
     public void LoadNextScene() {
         enabled = false; // stop playerMotor script from running
-        animator.enabled = false; // stop running animation or any animation for that matter
+        //animator.enabled = false; // stop running animation or any animation for that matter
         StartCoroutine("LoadScene");
        //LoadScene();
     }
     IEnumerator LoadScene() {
-        yield return new WaitForSeconds(3);
-
+		yield return new WaitForSeconds(5);
         int scene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);
     }

@@ -23,6 +23,9 @@ TagManager:
   - EnemyBody
   - hero
   - Game Audio
+  - falling
+  - FinalStop
+  - HUD
   layers:
   - Default
   - TransparentFX

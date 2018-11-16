@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4754369618810590}
   - component: {fileID: 114105789587032836}
+  - component: {fileID: 114327189684934834}
   m_Layer: 0
   m_Name: platformSpawner
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1270646613975906}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acf78dbbf42b226448e2093f1edb6d1f, type: 3}
   m_Name: 
@@ -55,3 +56,18 @@ MonoBehaviour:
   floorParent: {fileID: 1470449449825348, guid: b3cd428a4677cbe4fa779847dab3a840,
     type: 2}
   spawnLength: 100
+--- !u!114 &114327189684934834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270646613975906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb0c4129538bf98428a978953c442ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  floorParent: {fileID: 0}
+  spawnLength: 100
+  finalFloor: {fileID: 1320079416410048, guid: 7d7c6c28dd820f340946e5786d403627, type: 2}
