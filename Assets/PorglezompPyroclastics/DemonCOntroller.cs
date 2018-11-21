@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class DemonCOntroller : MonoBehaviour
 {
+    bool help = true;
     public Text win;
     private Rigidbody rb;
     public Slider healthbar;
@@ -50,8 +51,9 @@ public class DemonCOntroller : MonoBehaviour
     {
 
         if (healthbar.value<=0){
-            win.gameObject.SetActive(true);
+           
 			enemyMove = false;
+
 
 
         }
