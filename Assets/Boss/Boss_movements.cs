@@ -91,7 +91,8 @@ public class Boss_movements : MonoBehaviour
             currentTime += Time.deltaTime;
             yield return null;
         }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);
 
     }
 }

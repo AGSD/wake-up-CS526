@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class DemonCOntroller : MonoBehaviour
@@ -53,7 +54,7 @@ public class DemonCOntroller : MonoBehaviour
         if (healthbar.value<=0){
            
 			enemyMove = false;
-
+            StartCoroutine("LoadNextScene");
 
 
         }
@@ -96,5 +97,12 @@ public class DemonCOntroller : MonoBehaviour
 					rb.AddForce (0, 0, curMoveSpeed, ForceMode.Impulse);
 			}
         }
+    }
+
+    IEnumerator LoadNextScene()
+    {
+        yield return new WaitForSeconds(4);
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);
     }
 }
