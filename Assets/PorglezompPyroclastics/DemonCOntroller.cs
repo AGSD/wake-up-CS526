@@ -41,10 +41,10 @@ public class DemonCOntroller : MonoBehaviour
     {
         if (other.gameObject.tag == "aag ka gola")
         {
-            healthbar.value = healthbar.value - 5;
+            healthbar.value = healthbar.value - 50;
         }
         if (other.gameObject.tag == "aag ka shola")
-            healthbar.value = healthbar.value - 3;
+            healthbar.value = healthbar.value - 30;
     }
     // Update is called once per frame
     void Update()
