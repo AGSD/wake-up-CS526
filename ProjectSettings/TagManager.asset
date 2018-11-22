@@ -26,6 +26,8 @@ TagManager:
   - falling
   - FinalStop
   - HUD
+  - score
+  - highscore
   layers:
   - Default
   - TransparentFX
