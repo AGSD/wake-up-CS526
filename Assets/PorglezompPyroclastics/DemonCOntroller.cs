@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class DemonCOntroller : MonoBehaviour
@@ -41,10 +42,10 @@ public class DemonCOntroller : MonoBehaviour
     {
         if (other.gameObject.tag == "aag ka gola")
         {
-            healthbar.value = healthbar.value - 5;
+            healthbar.value = healthbar.value - 20;
         }
         if (other.gameObject.tag == "aag ka shola")
-            healthbar.value = healthbar.value - 3;
+            healthbar.value = healthbar.value - 10;
     }
     // Update is called once per frame
     void Update()
@@ -53,7 +54,7 @@ public class DemonCOntroller : MonoBehaviour
         if (healthbar.value<=0){
            
 			enemyMove = false;
-
+            StartCoroutine("LoadNextScene");
 
 
         }
@@ -61,7 +62,12 @@ public class DemonCOntroller : MonoBehaviour
     }
 
 
-
+    IEnumerator LoadNextScene()
+    {
+        yield return new WaitForSeconds(5);
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);
+    }
 
     private IEnumerator Randomjump()
     {

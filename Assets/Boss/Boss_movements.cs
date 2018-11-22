@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Boss_movements : MonoBehaviour
 {
@@ -67,17 +68,20 @@ public class Boss_movements : MonoBehaviour
     }
     IEnumerator killPlayer(float seconds)
     {
-        float currentTime = 0;
+        //float currentTime = 0;
         bossMoveFlag = false;
         goal.GetComponent<Player_bossLevel_movements>().setMoveBool(false);
-        
-        while (currentTime < seconds)
+
+        /*while (currentTime < seconds)
         {
             Debug.Log("CO ROUTINE LOOP");
             currentTime += Time.deltaTime;
             yield return null;
-        }
-      //  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }*/
+        yield return new WaitForSeconds(seconds);
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);
+        //  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
 }
