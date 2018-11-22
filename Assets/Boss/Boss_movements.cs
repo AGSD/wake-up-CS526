@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class Boss_movements : MonoBehaviour
 {
     public GameObject goal;
@@ -11,17 +12,22 @@ public class Boss_movements : MonoBehaviour
     public float speed;
     public Slider HealthBar;
     Animator anim;
-    private bool bossMoveFlag = true;
+    AudioSource audioSource;
+    public AudioClip[] audioClip;
+    public bool bossMoveFlag = true;
     public void setMoveBool(bool val) {
         anim.SetBool("isRunning", false);
         anim.SetBool("isAttacking1", false);
         anim.SetBool("isAttacking2", false);
         bossMoveFlag = false;
+        Debug.Log("JUST SET FALSE");
     }
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        playAudio(0);
     }
 
     // Update is called once per frame
@@ -37,6 +43,7 @@ public class Boss_movements : MonoBehaviour
                 anim.SetBool("isRunning", true);
                 anim.SetBool("isAttacking1", false);
                 anim.SetBool("isAttacking2", false);
+               
             }
             else
             {
@@ -47,12 +54,18 @@ public class Boss_movements : MonoBehaviour
             }
         }
     }
+    void playAudio(int clip)
+    {
+        audioSource.clip = audioClip[clip];
+        audioSource.Play();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bullet")
         {
             HealthBar.value -= 1;
             Debug.Log("Bullet Hit");
+            playAudio(2);
             Destroy(other.gameObject, 0f);
         }
 
@@ -68,20 +81,17 @@ public class Boss_movements : MonoBehaviour
     }
     IEnumerator killPlayer(float seconds)
     {
-        //float currentTime = 0;
+        float currentTime = 0;
         bossMoveFlag = false;
         goal.GetComponent<Player_bossLevel_movements>().setMoveBool(false);
-
-        /*while (currentTime < seconds)
+        playAudio(3);
+        while (currentTime < seconds)
         {
             Debug.Log("CO ROUTINE LOOP");
             currentTime += Time.deltaTime;
             yield return null;
-        }*/
-        yield return new WaitForSeconds(seconds);
-        int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(scene + 1, LoadSceneMode.Single);
-        //  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
 }
