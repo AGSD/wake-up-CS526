@@ -41,13 +41,13 @@ private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-            HealthBar.value -= 5;
+            HealthBar.value -= 1;
             Debug.Log("HitSmall");
             playAudio(1);
         }
         if (other.gameObject.tag == "Enemy2")
         {
-            HealthBar.value -= 10;
+            HealthBar.value -= 5;
             Debug.Log("HitBIG");
             playAudio(1);
         }
@@ -112,7 +112,7 @@ private void OnTriggerEnter(Collider other)
                 
             }
             
-            else if (Input.GetKey(KeyCode.DownArrow) || joystick.Vertical< -0.5f)
+            else if (Input.GetKey(KeyCode.DownArrow) || joystick.Vertical< -0.1f)
             {
                 anim.ResetTrigger("idle");
                 anim.SetTrigger("BackRun");

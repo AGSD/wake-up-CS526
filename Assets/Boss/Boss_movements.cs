@@ -63,7 +63,7 @@ public class Boss_movements : MonoBehaviour
     {
         if (other.gameObject.tag == "Bullet")
         {
-            HealthBar.value -= 1;
+            HealthBar.value -= 20;
             Debug.Log("Bullet Hit");
             playAudio(2);
             Destroy(other.gameObject, 0f);
